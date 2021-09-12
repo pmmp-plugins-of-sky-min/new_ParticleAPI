@@ -15,35 +15,38 @@ use function rad2deg;
 use function sin;
 use function sqrt;
 
+function circle(int $ParticleId, Vector3 $center, float $radius, float $unit, int $color, int $direction, float $start, float $finish, float $slope) :array{
+  if($start > $finish) $finish += 360;
+	$packets = array();
+	$x = $center->x;
+	$y = $center->y;
+	$z = $center->Z;
+	if($direction === 0){
+		for ($i = 0; $i < 360; $i += $unit){
+		if(($angle = $i + $start) > $finish) break;
+		$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
+		$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
+	  }
+		return $packets;
+	}
+	if($direction === 1){
+		for ($i = 0; $i < 360; $i += $unit){
+			if(($angle = 360 - $i + $start) > $finish) break;
+			$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
+			$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
+		}
+		return $packets;
+	}
+}
+
 class ParticleAPI{
 	
 	public const RIGHT = 0;
 	public const LEFT = 1;
 	
-	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit,  array $players, int $color, int $direction = self::RIGHT, float $start = 0, float $finish = 360, int $slope = 0) :void{
-		if($start > $finish) $finish += 360;
-		$packets = array();
-		$x = $center->x;
-		$y = $center->y;
-		$z = $center->Z;
-		if($direction === self::RIGHT){
-			for ($i = 0; $i < 360; $i += $unit){
-				if(($angle = $i + $start) > $finish) break;
-				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
-				$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
-			}
-			Server::getInstance()->broadcastPackets($players, $packets);
-			return;
-		}
-		if($direction === self::LEFT){
-			for ($i = 0; $i < 360; $i += $unit){
-				if(($angle = 360 - $i + $start) > $finish) break;
-				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
-				$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
-			}
-			Server::getInstance()->broadcastPackets($players, $packets);
-			return;
-		}
+	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit,  array $players, int $color, int $direction = self::RIGHT, float $start = 0, float $finish = 360, float $slope = 0) :void{
+		$packets = circle($ParticleId, $center, $radius, $unit, $color, $direction, $start, $finish, $slope);
+		Server::getInstance()->broadcastPackets($players, $packets);
 	}
 	
 }
