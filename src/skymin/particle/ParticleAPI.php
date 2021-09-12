@@ -20,7 +20,7 @@ function circle(int $ParticleId, Vector3 $center, float $radius, float $unit, in
 	$packets = array();
 	$x = $center->x;
 	$y = $center->y;
-	$z = $center->Z;
+	$z = $center->z;
 	for ($i = 0; $i < 360; $i += $unit){
 		if(($angle = $i + $start) > $finish) break;
 		$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
