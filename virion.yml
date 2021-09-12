@@ -1,5 +1,5 @@
 name: ParticleAPI
-antigen: skymin\ParticleAPI
+antigen: skymin\particle
 api: 4.0.0
 version: SKY
 author: skymin
