@@ -4,12 +4,8 @@ declare(strict_types = 1);
 namespace skymin\particle;
 
 use pocketmine\Server;
-
 use pocketmine\math\Vector3;
-
 use pocketmine\network\mcpe\protocol\LevelEventPacket;
-
-use pocketmine\color\Color;
 
 use function atan2;
 use function cos;
