@@ -33,7 +33,7 @@ class ParticleAPI{
 		if($direction === self::RIGHT){
 			for ($i = 0; $i < 360; $i += $unit){
 				if(($angle = $i + $start) > $finish) break;
-				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + sin(deg2rad($i)) * $slope, $z + cos(deg2rad($angle)) * $radius);
+				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
 				$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
 			}
 			Server::getInstance()->broadcastPackets($players, $packets);
@@ -42,7 +42,7 @@ class ParticleAPI{
 		if($direction === self::LEFT){
 			for ($i = 0; $i < 360; $i += $unit){
 				if(($angle = 360 - $i + $start) > $finish) break;
-				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + sin(deg2rad($i)) * $slope, $z + cos(deg2rad($angle)) * $radius);
+				$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
 				$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
 			}
 			Server::getInstance()->broadcastPackets($players, $packets);
