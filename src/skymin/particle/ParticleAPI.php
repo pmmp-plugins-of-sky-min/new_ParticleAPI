@@ -15,15 +15,18 @@ use function rad2deg;
 use function sin;
 use function sqrt;
 
-function circle(int $ParticleId, Vector3 $center, float $radius, float $unit, int $color, float $start, float $finish, float $slope) :array{
-  if($start >= $finish) $finish += 360;
+function circle(int $ParticleId, Vector3 $center, float $radius, float $unit, int $color, float $slope, int $type, float $angle) :array{
 	$packets = array();
 	$x = $center->x;
 	$y = $center->y;
 	$z = $center->z;
 	for ($i = 0; $i < 360; $i += $unit){
-		if(($angle = $i + $start) > $finish) break;
-		$vec = new Vector3($x + sin(deg2rad($angle)) * $radius, $y + (sin(deg2rad($i)) * $slope), $z + cos(deg2rad($angle)) * $radius);
+		if($type === 0){
+			$vec = new Vector3($x + sin(deg2rad($i)) * $radius, $y + (sin(deg2rad($i + $angle))) * $slope, $z + cos(deg2rad($i)) * $radius);
+		}
+		if($type === 1){
+			$vec = new Vector3($x + sin(deg2rad($i)) * $radius, $y + cos(deg2rad($i + $angle)) * $slope, $z + cos(deg2rad($i)) * $radius);
+		}
 		$packets[] = LevelEventPacket::standardParticle($ParticleId, $color, $vec);
 	}
 	return $packets;
@@ -31,8 +34,11 @@ function circle(int $ParticleId, Vector3 $center, float $radius, float $unit, in
 
 class ParticleAPI{
 	
-	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit,  array $players, int $color = 0, float $start = 0, float $finish = 360, float $slope = 0) :void{
-		$packets = circle($ParticleId, $center, $radius, $unit, $color, $start, $finish, $slope);
+	public const SIN = 0;
+	public const COS = 1;
+	
+	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit,  array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0.0) :void{
+		$packets = circle($ParticleId, $center, $radius, $unit, $color, $slope, $type, $angle);
 		Server::getInstance()->broadcastPackets($players, $packets);
 	}
 	
