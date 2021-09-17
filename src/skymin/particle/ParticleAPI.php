@@ -54,6 +54,10 @@ function straight(int $ParticleId, Vector3 $pos1, Vector3 $pos2, float $unit, in
 	return $packets;
 }
 
+function sendPackets(array $players, array $packets) :void{
+	Server::getInstance()->broadcastPackets($players, $packets);
+}
+
 class ParticleAPI{
 	
 	/*circle type*/
@@ -62,31 +66,32 @@ class ParticleAPI{
 	
 	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit, array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0.0) :void{
 		$packets = circle($ParticleId, $center, $radius, $unit, $color, $slope, $type, $angle);
-		Server::getInstance()->broadcastPackets($players, $packets);
+		sendPackets($players, $packets);
 	}
 	
 	public static function drawStraight(int $ParticleId, Vector3 $pos1, Vector3 $pos2, float $unit, array $players, int $color = 0) :void{
 		$packets = straight($ParticleId, $pos1, $pos2, $unit, $color);
-		Server::getInstance()->broadcastPackets($players, $packets);
+		sendPackets($players, $packets);
 	}
 	
-	public static function drawRegular(int $ParticleId, Vector3 $center, float $radius, int $side, float $length, float $unit, float $rotation, array $players, int $color = 0) :void{
+	public static function drawRegular(int $ParticleId, Vector3 $center, float $radius, int $side, float $unit, float $rotation, array $players, int $color = 0) :void{
 		$packets = array();
 		$ang = 180 * ($side - 2);
 		$round = 180 - ($ang / $side);
 		for($i = $rotation; $i <= $rotation + 360; $i += $round){
+			$x1 = ($i == $rotation) ? $center->getX() + $radius * (-\sin ($i / 180 * M_PI)) : $x2;
+			$y1 = ($i == $rotation) ? $center->getY() : $y2;
+			$z1 = ($i == $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
 			$x2 = $center->getX() + $radius * (-\sin($i / 180 * M_PI));
 			$y2 = $center->getY();
 			$z2 = $center->getZ() + $radius * (\cos($i / 180 * M_PI));
-			$x1 = ($i === $rotation) ? $center->getX() + $radius * (-\sin($i / 180 * M_PI)) : $x2;
-			$y1 = ($i === $rotation) ? $center->getY() : $y2;			$z1 = ($i === $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
 			if($i !== $rotation){
 				$vec_1 = new Vector3($x1, $y1, $z1);
 				$vec_2 = new Vector3($x2, $y2, $z2);
 				$packets = array_merge($packets, straight($ParticleId, $vec_1, $vec_2, $unit, $color));
 			}
 		}
-		Server::getInstance()->broadcastPackets($players, $packets);
+		sendPackets($players, $packets);
 	}
 	
 }
