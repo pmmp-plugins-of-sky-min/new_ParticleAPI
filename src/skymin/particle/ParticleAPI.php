@@ -79,9 +79,9 @@ class ParticleAPI{
 		$ang = 180 * ($side - 2);
 		$round = 180 - ($ang / $side);
 		for($i = $rotation; $i <= $rotation + 360; $i += $round){
-			$x1 = ($i == $rotation) ? $center->getX() + $radius * (-\sin ($i / 180 * M_PI)) : $x2;
-			$y1 = ($i == $rotation) ? $center->getY() : $y2;
-			$z1 = ($i == $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
+			$x1 = ($i === $rotation) ? $center->getX() + $radius * (-\sin ($i / 180 * M_PI)) : $x2;
+			$y1 = ($i === $rotation) ? $center->getY() : $y2;
+			$z1 = ($i === $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
 			$x2 = $center->getX() + $radius * (-\sin($i / 180 * M_PI));
 			$y2 = $center->getY();
 			$z2 = $center->getZ() + $radius * (\cos($i / 180 * M_PI));
