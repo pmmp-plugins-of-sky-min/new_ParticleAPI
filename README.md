@@ -5,8 +5,17 @@ virion project
 ## Variable Description
 $ParticleId : int : [ParticleIds](https://github.com/pmmp/BedrockProtocol/blob/master/src/types/ParticleIds.php)
 
-$center, $pos1, $pos2 : Vector3 : 
+$center, $pos1, $pos2 : Vector3
 
+$unit : float : Particle spacing
+
+$players : array : Players who can see particles.
+
+$color : int : [Color](https://github.com/pmmp/Color/blob/master/src/Color.php)->toARGB()
+
+
+
+## Draw Particle
 
 ### linked for use
 ```php
