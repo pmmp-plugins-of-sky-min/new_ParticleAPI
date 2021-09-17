@@ -64,7 +64,7 @@ class ParticleAPI{
 	public const SIN = 0;
 	public const COS = 1;
 	
-	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit, array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0.0) :void{
+	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit, array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0) :void{
 		$packets = circle($ParticleId, $center, $radius, $unit, $color, $slope, $type, $angle);
 		sendPackets($players, $packets);
 	}
