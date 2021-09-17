@@ -13,7 +13,17 @@ $players : array : Players who can see particles.
 
 $color : int : [Color](https://github.com/pmmp/Color/blob/master/src/Color.php)->toARGB()
 
+$slope : float
 
+$type : int : ParticleAPI::SIN or ParticleAPI::COS. this is trig(trigonometric) ratio. 'I felt the need due to the slope and angle.'
+
+$angle : float
+
+$radius : float : Distance from the center
+
+$side : int : number of vertices. 3 or higher.
+
+$rotation : float : direction
 
 ## Draw Particle
 
