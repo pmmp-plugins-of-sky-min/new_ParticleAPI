@@ -64,7 +64,7 @@ class ParticleAPI{
 	public const SIN = 0;
 	public const COS = 1;
 	
-	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit, array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0) :void{
+	public static function drawCircle(int $ParticleId, Vector3 $center, float $radius, float $unit, array $players, int $color = 0, float $slope = 0, int $type = self::SIN, float $angle = 0.0) :void{
 		$packets = circle($ParticleId, $center, $radius, $unit, $color, $slope, $type, $angle);
 		sendPackets($players, $packets);
 	}
@@ -74,18 +74,18 @@ class ParticleAPI{
 		sendPackets($players, $packets);
 	}
 	
-	public static function drawRegular(int $ParticleId, Vector3 $center, float $radius, int $side, float $unit, float $rotation, array $players, int $color = 0) :void{
+	public static function drawRegular(int $ParticleId, Vector3 $center, float $radius, int $side, float $unit, float $angle, array $players, int $color = 0) :void{
 		$packets = array();
 		$ang = 180 * ($side - 2);
 		$round = 180 - ($ang / $side);
-		for($i = $rotation; $i <= $rotation + 360; $i += $round){
-			$x1 = ($i === $rotation) ? $center->getX() + $radius * (-\sin ($i / 180 * M_PI)) : $x2;
-			$y1 = ($i === $rotation) ? $center->getY() : $y2;
-			$z1 = ($i === $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
+		for($i = $angle; $i <= $angle + 360; $i += $round){
+			$x1 = ($i === $angle) ? $center->getX() + $radius * (-\sin ($i / 180 * M_PI)) : $x2;
+			$y1 = ($i === $angle) ? $center->getY() : $y2;
+			$z1 = ($i === $angle) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
 			$x2 = $center->getX() + $radius * (-\sin($i / 180 * M_PI));
 			$y2 = $center->getY();
 			$z2 = $center->getZ() + $radius * (\cos($i / 180 * M_PI));
-			if($i !== $rotation){
+			if($i !== $angle){
 				$vec_1 = new Vector3($x1, $y1, $z1);
 				$vec_2 = new Vector3($x2, $y2, $z2);
 				$packets = array_merge($packets, straight($ParticleId, $vec_1, $vec_2, $unit, $color));
