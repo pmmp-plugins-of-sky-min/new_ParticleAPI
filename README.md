@@ -1,7 +1,7 @@
 # new_ParticleAPI
 virion project
 
-# HOW TK USE
+# HOW TO USE
 ```php
 use skymin\particle\ParticleAPI;
 ```
