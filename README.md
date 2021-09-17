@@ -2,6 +2,7 @@
 virion project
 
 # HOW TO USE
+linked for use
 ```php
 use skymin\particle\ParticleAPI;
 ```
