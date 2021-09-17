@@ -2,7 +2,13 @@
 virion project
 
 # HOW TO USE
-linked for use
+## Variable Description
+$ParticleId : int : [ParticleIds](https://github.com/pmmp/BedrockProtocol/blob/master/src/types/ParticleIds.php)
+
+$center, $pos1, $pos2 : Vector3 : 
+
+
+### linked for use
 ```php
 use skymin\particle\ParticleAPI;
 ```
