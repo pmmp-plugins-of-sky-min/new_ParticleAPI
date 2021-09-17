@@ -75,11 +75,11 @@ class ParticleAPI{
 		$ang = 180 * ($side - 2);
 		$round = 180 - ($ang / $side);
 		for($i = $rotation; $i <= $rotation + 360; $i += $round){
-			$x2 = $vec->getX() + $radius * (-\sin($i / 180 * M_PI));
-			$y2 = $vec->getY();
-			$z2 = $vec->getZ() + $radius * (\cos($i / 180 * M_PI));
-			$x1 = ($i === $rotation) ? $vec->getX() + $radius * (-\sin($i / 180 * M_PI)) : $x2;
-			$y1 = ($i === $rotation) ? $vec->getY() : $y2;			$z1 = ($i === $rotation) ? $vec->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
+			$x2 = $center->getX() + $radius * (-\sin($i / 180 * M_PI));
+			$y2 = $center->getY();
+			$z2 = $center->getZ() + $radius * (\cos($i / 180 * M_PI));
+			$x1 = ($i === $rotation) ? $center->getX() + $radius * (-\sin($i / 180 * M_PI)) : $x2;
+			$y1 = ($i === $rotation) ? $center->getY() : $y2;			$z1 = ($i === $rotation) ? $center->getZ() + $radius * (\cos($i / 180 * M_PI)) : $z2;
 			if($i !== $rotation){
 				$vec_1 = new Vector3($x1, $y1, $z1);
 				$vec_2 = new Vector3($x2, $y2, $z2);
