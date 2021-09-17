@@ -17,13 +17,11 @@ $slope : float
 
 $type : int : ParticleAPI::SIN or ParticleAPI::COS. this is trig(trigonometric) ratio. 'I felt the need due to the slope and angle.'
 
-$angle : float
+$angle : float : direction or angle
 
 $radius : float : Distance from the center
 
-$side : int : number of vertices. 3 or higher.
-
-$rotation : float : direction
+$side : int : number of vertices. 3 or higher
 
 ## Draw Particle
 
