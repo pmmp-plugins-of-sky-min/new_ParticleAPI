@@ -42,7 +42,7 @@ ParticleAPI::drawStraight($ParticleId, $pos1, $pos2, $unit, $players, $color);
 
 ### draw regular particle
 ```php
-ParticleAPI::drawRegular($ParticleId, $center, $radius, $side, $unit, $rotation, $players, $color);
+ParticleAPI::drawRegular($ParticleId, $center, $radius, $side, $unit, $angle, $players, $color);
 ```
 # Example
 [@example](https://github.com/sky-min/new_ParticleAPI/blob/master/example/ParticleTest.php)
