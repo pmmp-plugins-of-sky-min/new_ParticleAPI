@@ -3,8 +3,8 @@ build-by-default: true
 branches:
 - master
 projects:
-  new_ParticleAPI:
-    path: ""
+  ParticleAPI:
+    path: "ParticleAPI"
     model: virion
     type: library
 ...
