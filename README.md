@@ -1,7 +1,7 @@
 # new_ParticleAPI
 virion project
 
-[DOWNLOAD](https://poggit.pmmp.io/ci/sky-min/new_ParticleAPI/~
+[DOWNLOAD](https://poggit.pmmp.io/ci/sky-min/new_ParticleAPI/~)
 
 # HOW TO USE
 ## Variable Description
