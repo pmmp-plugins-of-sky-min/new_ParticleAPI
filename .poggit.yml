@@ -4,7 +4,7 @@ branches:
 - master
 projects:
   ParticleAPI:
-    path: "ParticleAPI"
+    path: "ParticleAPI/"
     model: virion
     type: library
 ...
