@@ -1,7 +1,7 @@
 <?php
 /**
- * @name CircleTest
- * @main test\CircleTest
+ * @name regulartest
+ * @main test\regulartest
  * @author skymin
  * @version SKY
  * @api 4.0.0
@@ -20,7 +20,7 @@ use pocketmine\network\mcpe\protocol\types\ParticleIds;
 
 use skymin\particle\ParticleAPI;
 
-class CircleTest extends PluginBase implements Listener{
+class regulartest extends PluginBase implements Listener{
 	
 	public function onEnable() :void{
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);
