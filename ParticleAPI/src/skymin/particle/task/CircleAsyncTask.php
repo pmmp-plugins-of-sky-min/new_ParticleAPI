@@ -15,6 +15,8 @@ final class CircleAsyncTask extends AsyncTask{
 	use SendPacketTrait;
 	use CircleTrait;
 	
+	private array $targets = [];
+	
 	public function __construct(
 		private int $ParticleId,
 		private float $x,

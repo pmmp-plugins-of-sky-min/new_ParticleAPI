@@ -5,18 +5,21 @@ namespace skymin\particle\utils;
 
 use pocketmine\Server;
 
+use pocketmine\network\mcpe\compression\ZlibCompressor;
+use pocketmine\network\mcpe\protocol\serializer\{PacketSerializerContext, PacketBatch};
+use pocketmine\network\mcpe\convert\GlobalItemTypeDictionary;
+
 trait SendPacketTrait{
 	
-	private array $targets = [];
-	
 	public function onCompletion() :void{
+		$result = (array)$this->getResult();
 		$server = Server::getInstance();
-		$targets = array();
+		$batch = $server->prepareBatch(PacketBatch::fromPackets(new PacketSerializerContext(GlobalItemTypeDictionary::getInstance()->getDictionary()), ...$result), ZlibCompressor::getInstance());
 		foreach ($this->targets as $name){
-			if(($target = $server->getPlayerExact($name)) === null) continue;
-			$targets[] = $target;
+			$target = $server->getPlayerExact($name);
+			if($target === null) continue;
+			$target->getNetworkSession()->queueCompressed($batch);
 		}
-		$server->broadcastPackets($targets, $this->getResult());
 	}
 	
 }

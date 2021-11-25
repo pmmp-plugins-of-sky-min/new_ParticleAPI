@@ -18,6 +18,8 @@ final class RegularAsyncTask extends AsyncTask{
 	use SendPacketTrait;
 	use StraightTrait;
 	
+	private array $targets = [];
+	
 	public function __construct(
 		private int $ParticleId,
 		private float $x,
